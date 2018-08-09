@@ -29,7 +29,10 @@
     "lint": "eslint .",
     "dev": "webpack --config build/webpack.development.js --progress",
     "watch": "webpack-dev-server --config build/webpack.watch.js --progress",
-    "production": "webpack --config build/webpack.production.js"
+    "production": "webpack --config build/webpack.production.js",
+    "bs-approve": "backstop approve",
+    "bs-test": "backstop test",
+    "bs-init": "backstop init"
   },
   "devDependencies": {
     "angular-mocks": "~1.6.6",
@@ -40,6 +43,7 @@
     "babel-loader": "^7.1.2",
     "babel-plugin-istanbul": "^4.1.5",
     "babel-preset-env": "^1.6.0",
+    "backstopjs": "^3.5.2",
     "chromedriver": "^2.35.0",
     "clean-webpack-plugin": "^0.1.16",
     "copy-webpack-plugin": "^4.0.1",
