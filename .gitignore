@@ -121,3 +121,9 @@ venv/*
 use_dev_supervisor.txt
 
 .idea/*
+
+# BackstopJS
+/awx/ui/.env
+/awx/ui/backstop_data/bitmaps_test/
+/awx/ui/backstop_data/bitmaps_reference/
+/awx/ui/backstop_data/html_report/
