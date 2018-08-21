@@ -1,13 +1,13 @@
 module.exports = function (page, scenario) {
-
-  page.evaluate(()=> {
-    new Promise(((resolve, reject) => 
+  var test = scenario;
+  return page.evaluate((test)=> {
+    return new Promise(((resolve, reject) => 
     angular.getTestability(document.body)
       .whenStable(() => {
-        console.log('>>>>>>>>>>>>>>>>>>>>> ready for testing');
+        console.log('>>>>>>>>>>>>>>>>>>>>> ' + test.label + ' ready for testing');
         resolve();
       })  
     ))
-  });
+  }, test);
 }
 
