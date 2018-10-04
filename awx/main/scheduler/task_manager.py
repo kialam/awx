@@ -197,7 +197,11 @@ class TaskManager():
                 spawn_node.job = job
                 spawn_node.save()
                 if job._resources_sufficient_for_launch():
-                    can_start = job.signal_start()
+                    if workflow_job.start_args:
+                        start_args = json.loads(decrypt_field(workflow_job, 'start_args'))
+                    else:
+                        start_args = {}
+                    can_start = job.signal_start(**start_args)
                     if not can_start:
                         job.job_explanation = _("Job spawned from workflow could not start because it "
                                                 "was not in the right state or required manual credentials")
@@ -220,7 +224,8 @@ class TaskManager():
             dag = WorkflowDAG(workflow_job)
             if workflow_job.cancel_flag:
                 workflow_job.status = 'canceled'
-                workflow_job.save()
+                workflow_job.start_args = ''  # blank field to remove encrypted passwords
+                workflow_job.save(update_fields=['status', 'start_args'])
                 dag.cancel_node_jobs()
                 connection.on_commit(lambda: workflow_job.websocket_emit_status(workflow_job.status))
             else:
@@ -228,8 +233,11 @@ class TaskManager():
                 if not is_done:
                     continue
                 result.append(workflow_job.id)
-                workflow_job.status = 'failed' if has_failed else 'successful'
-                workflow_job.save()
+                new_status = 'failed' if has_failed else 'successful'
+                logger.debug(six.text_type("Transitioning {} to {} status.").format(workflow_job.log_format, new_status))
+                workflow_job.status = new_status
+                workflow_job.start_args = ''  # blank field to remove encrypted passwords
+                workflow_job.save(update_fields=['status', 'start_args'])
                 connection.on_commit(lambda: workflow_job.websocket_emit_status(workflow_job.status))
         return result
 
