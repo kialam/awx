@@ -89,7 +89,11 @@ function ListJobsController (
             return null;
         }
 
-        return `Split Job ${splitJobDetails.offset + 1}/${splitJobDetails.step}`;
+        if (splitJobDetails.offset && splitJobDetails.step) {
+            return `Split Job ${splitJobDetails.offset + 1}/${splitJobDetails.step}`;
+        }
+
+        return null;
     };
 
     vm.getSref = ({ type, id }) => {
