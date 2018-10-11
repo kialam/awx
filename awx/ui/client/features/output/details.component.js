@@ -139,11 +139,18 @@ function getSplitJobDetails () {
         return null;
     }
 
+    if (!splitJobDetails.offset || !splitJobDetails.step) {
+        return null;
+    }
+
     const label = strings.get('labels.SPLIT_JOB');
-    const offset = `${splitJobDetails.offset + 1}/${splitJobDetails.step}`;
+    const offset = `${splitJobDetails.offset + 1}/${splitJobDetails.step}` || null;
     const tooltip = strings.get('tooltips.SPLIT_JOB_DETAILS');
 
-    return { label, offset, tooltip };
+    if (label && offset && tooltip) {
+        return { label, offset, tooltip };
+    }
+    return null;
 }
 
 function getJobTemplateDetails () {
