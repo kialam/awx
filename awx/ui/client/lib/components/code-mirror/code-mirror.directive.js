@@ -1,6 +1,6 @@
 const templateUrl = require('~components/code-mirror/code-mirror.partial.html');
 
-const CodeMirrorID = 'codemirror-extra-vars';
+// const CodeMirrorID = 'codemirror-extra-vars';
 const CodeMirrorModalID = '#CodeMirror-modal';
 const ParseVariable = 'parseType';
 const CodeMirrorVar = 'variables';
@@ -25,7 +25,7 @@ function atCodeMirrorController (
             scope: $scope,
             variable: CodeMirrorVar,
             parse_variable: ParseVariable,
-            field_id: CodeMirrorID,
+            field_id: $scope.fieldId,
             readOnly: $scope.disabled
         };
         ParseTypeChange(options);
@@ -42,6 +42,7 @@ function atCodeMirrorController (
         vm.expanded = false;
     }
 
+    vm.fieldId = $scope.fieldId;
     vm.strings = strings;
     vm.expanded = false;
     vm.close = close;
@@ -49,7 +50,10 @@ function atCodeMirrorController (
     if ($scope.init) {
         $scope.init = init;
     }
-    init($scope.variables);
+
+    angular.element(document).ready(() => {
+        init($scope.variables);
+    });
 }
 
 atCodeMirrorController.$inject = [
@@ -74,6 +78,7 @@ function atCodeMirrorTextarea () {
             tooltip: '@',
             tooltipPlacement: '@',
             variables: '@',
+            fieldId: '@',
             init: '='
         }
     };

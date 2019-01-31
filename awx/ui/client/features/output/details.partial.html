@@ -333,7 +333,18 @@
     variables="{{ vm.extraVars.value }}"
     tooltip="{{ vm.extraVars.tooltip }}"
     label="{{ vm.extraVars.label}}"
+    field-id="{{ vm.extraVars.fieldId }}"
     disabled="{{ vm.extraVars.disabled }}">
+</at-code-mirror>
+<!-- ARTIFACTS DETAIL -->
+<at-code-mirror
+    class="JobResults-resultRow"
+    ng-if="vm.artifacts"
+    variables="{{ vm.artifacts.value }}"
+    tooltip="{{ vm.artifacts.tooltip }}"
+    label="{{ vm.artifacts.label}}"
+    field-id="{{ vm.artifacts.fieldId }}"
+    disabled="{{ vm.artifacts.disabled }}">
 </at-code-mirror>
 
 <!-- LABELS DETAIL -->

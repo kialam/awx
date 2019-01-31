@@ -47,7 +47,7 @@
         ng-model="variables"
         name="variables"
         class="form-control Form-textArea"
-        id="codemirror-extra-vars">
+        id="{{ vm.fieldId }}">
     </textarea>
     <at-code-mirror-modal
         ng-if="vm.expanded"

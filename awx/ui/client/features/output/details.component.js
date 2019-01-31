@@ -572,8 +572,25 @@ function getExtraVarsDetails () {
     const tooltip = strings.get('tooltips.EXTRA_VARS');
     const value = parse(extraVars);
     const disabled = true;
+    const fieldId = 'foo';
 
-    return { label, tooltip, value, disabled };
+    return { label, tooltip, value, disabled, fieldId };
+}
+
+function getArtifactsDetails () {
+    const artifacts = resource.model.get('artifacts');
+
+    if (!artifacts) {
+        return null;
+    }
+
+    const label = 'ARTIFACTS';
+    const tooltip = 'blah blah';
+    const value = parse(artifacts);
+    const disabled = true;
+    const fieldId = 'bar';
+
+    return { label, tooltip, value, disabled, fieldId };
 }
 
 function getLabelDetails () {
@@ -781,6 +798,7 @@ function JobDetailsController (
         vm.jobTags = getJobTagDetails();
         vm.skipTags = getSkipTagDetails();
         vm.extraVars = getExtraVarsDetails();
+        vm.artifacts = getArtifactsDetails();
         vm.labels = getLabelDetails();
         vm.inventorySource = getInventorySourceDetails();
         vm.overwrite = getOverwriteDetails();
