@@ -1223,6 +1223,7 @@ class BaseTask(object):
                                                            ident=str(self.instance.pk))
                 self.event_ct = len(isolated_manager_instance.handled_events)
             else:
+                params['resource_profiling'] = True # TODO
                 res = ansible_runner.interface.run(**params)
                 status = res.status
                 rc = res.rc

@@ -4112,7 +4112,7 @@ class JobEventSerializer(BaseSerializer):
     class Meta:
         model = JobEvent
         fields = ('*', '-name', '-description', 'job', 'event', 'counter',
-                  'event_display', 'event_data', 'event_level', 'failed',
+                  'event_display', 'event_data', 'profiling_data', 'event_level', 'failed',
                   'changed', 'uuid', 'parent_uuid', 'host', 'host_name', 'parent',
                   'playbook', 'play', 'task', 'role', 'stdout', 'start_line', 'end_line',
                   'verbosity')
