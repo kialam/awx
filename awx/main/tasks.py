@@ -1189,6 +1189,12 @@ class BaseTask(object):
                 # Disable Ansible fact cache.
                 params['fact_cache_type'] = ''
 
+            if isinstance(self.instance, Job) and settings.AWX_PERF_STATS_ENABLED:
+                logger.info('Resource profiling enabled')
+                params['resource_profiling'] = True
+            else:
+                logger.info('Resource profiling *not* enabled')
+
             '''
             Delete parameters if the values are None or empty array
             '''
@@ -1223,7 +1229,6 @@ class BaseTask(object):
                                                            ident=str(self.instance.pk))
                 self.event_ct = len(isolated_manager_instance.handled_events)
             else:
-                params['resource_profiling'] = True # TODO
                 res = ansible_runner.interface.run(**params)
                 status = res.status
                 rc = res.rc

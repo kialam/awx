@@ -312,6 +312,16 @@ register(
 )
 
 register(
+    'AWX_PERF_STATS_ENABLED',
+    field_class=fields.BooleanField,
+    default=True,
+    label=_('Enable Performance Stats'),
+    help_text=_('Collect resource profiling data for playbook runs'),
+    category=_('System'),
+    category_slug='system',
+)
+
+register(
     'AWX_ROLES_ENABLED',
     field_class=fields.BooleanField,
     default=True,
