@@ -17,7 +17,7 @@ RUN yum -y update && yum -y install openssh-server ansible mg vim tmux \
   xmlsec1-devel swig krb5-devel xmlsec1-openssl xmlsec1 \
   xmlsec1-openssl-devel libtool-ltdl-devel rabbitmq-server bubblewrap \
   zanata-python-client gettext gcc-c++ libcurl-devel bzip2 \
-  rsync
+  rsync libcgroup-tools
 
 RUN ln -s /usr/bin/python36 /usr/bin/python3
 
